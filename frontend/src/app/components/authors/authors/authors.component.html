@@ -1,0 +1,25 @@
+<div class="container col-md-12">
+  <h2>All Authors</h2>
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let author of authors$ | async">
+          <td>{{author.name}}</td>
+          <th> <button type="button" (click)="viewArticles(author)" class="btn bt-sm btn-info">
+              Articles
+            </button> </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

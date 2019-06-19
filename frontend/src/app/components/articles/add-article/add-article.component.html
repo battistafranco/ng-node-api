@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2 class="text-center">Add Article</h2>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Title:</label>
+        <input
+          type="text"
+          formControlName="title"
+          placeholder="Title"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+        />
+        <div *ngIf="submitted && f.title.errors">
+          <div *ngIf="f.title.errors.required">Title is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Short Description:</label>
+        <input
+          type="text"
+          formControlName="short_description"
+          placeholder="Short Description"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.short_description.errors }"
+        />
+        <div *ngIf="submitted && f.short_description.errors">
+          <div *ngIf="f.short_description.errors.required">
+            Short Description is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Long Description:</label>
+
+        <textarea type="text"
+        formControlName="long_description"
+        placeholder="Long Description"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.long_description.errors }" cols="40" rows="5"></textarea>
+
+        <!-- <input
+          type="text"
+          formControlName="long_description"
+          placeholder="Long Description"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.long_description.errors }"
+        /> -->
+        <div *ngIf="submitted && f.long_description.errors">
+          <div *ngIf="f.long_description.errors.required">
+            Long Description is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Authors</label>
+        <div class="form-inline">
+          <select
+            #ddlAuthors
+            formControlName="selectedAuthor"
+            class="form-control col-md-10"
+          >
+            <option
+              value="{{ author._id }}"
+              *ngFor="let author of authors$ | async"
+              >{{ author.name }}</option
+            >
+          </select>
+          <button
+            type="button"
+            (click)="addAuthor()"
+            class="btn btn-success col-md-2"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Article Authors</label>
+        <app-list-authors></app-list-authors>
+      </div>
+      <button type="submit" class="btn btn-info">Save</button>
+    </form>
+  </div>  
+</div>
+

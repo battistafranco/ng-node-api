@@ -1,0 +1,46 @@
+<div class="container col-md-12">
+  <h2>All Articles</h2>
+  <div class="form-group form-inline">
+    <input
+      [(ngModel)]="searchField"
+      type="text"
+      style="width: 50%"
+      placeholder="Search by Title"
+      class="form-control"
+    />
+    <button (click)="search()" class="btn btn-info">
+      Search
+    </button>
+    <button (click)="clear()" class="btn btn-default">
+        Reset
+      </button>
+  </div>
+  <table class="table table-hover table-striped">
+    <thead class="thead-light">
+      <tr>
+        <th>Title</th>
+        <th>Short Description</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let article of articles$ | async">
+        <td>{{ article.title }}</td>
+        <td>{{ article.short_description }}</td>
+
+        <td>
+          <button (click)="updateArticle(article)" class="btn btn-info">
+            Edit
+          </button>
+          <button
+            (click)="deleteArticle(article)"
+            style="margin-left: 20px;"
+            class="btn btn-danger"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
